@@ -12,7 +12,7 @@ ipkg = "idris2-Multiset.ipkg"
 
 [custom.all.idris2-ref1]
 type = "local"
-path = "../../Library/Src/idris2-ref1"
+path = "../Library/Src/idris2-ref1"
 ipkg = "ref1.ipkg"
 
 [custom.all.idris2-QuickCheck]

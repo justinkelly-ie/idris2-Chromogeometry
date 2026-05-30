@@ -53,14 +53,20 @@ quadranceNL metric pA pB =
 ||| Restored: Archimedes formula for a triangle.
 ||| Evaluates the structural metric tension formed by three spatial coordinate points.
 |||
-public export
-archimedesNL : Metric -> Pixel Integer -> Pixel Integer -> Pixel Integer -> Integer
-archimedesNL metric p1 p2 p3 =
-  let q1 = quadranceNL metric p1 p2
-      q2 = quadranceNL metric p2 p3
-      q3 = quadranceNL metric p3 p1
+||| Internal total helper for Euclidean Blue Archimedes calculation.
+archimedesBlueNL : Pixel Integer -> Pixel Integer -> Pixel Integer -> Integer
+archimedesBlueNL p1 p2 p3 =
+  let q1 = quadranceNL Blue p1 p2
+      q2 = quadranceNL Blue p2 p3
+      q3 = quadranceNL Blue p3 p1
       sumQ = q1 + q2 + q3
   in (sumQ * sumQ) - (2 * (q1*q1 + q2*q2 + q3*q3))
+
+public export
+archimedesNL : Metric -> Pixel Integer -> Pixel Integer -> Pixel Integer -> Integer
+archimedesNL Blue p1 p2 p3 = archimedesBlueNL p1 p2 p3
+archimedesNL Red p1 p2 p3 = - (archimedesBlueNL p1 p2 p3)
+archimedesNL Green p1 p2 p3 = - (archimedesBlueNL p1 p2 p3)
 
 ||| Restored: Pure non-linear algebraic Spread.
 ||| Calculates exact trigonometric separation without transcendental functions (cos/sin).
